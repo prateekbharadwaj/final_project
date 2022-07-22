@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.user.demo.dto.LoginDTO;
 import com.user.demo.dto.UserProfileDTO;
 import com.user.demo.entity.UserProfile;
+import com.user.demo.exception.UserNotFoundException;
 import com.user.demo.repository.UserProfileRepository;
 
 @Service
@@ -64,12 +65,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String deleteUserByUserId(int userId) throws Exception {
+	public String deleteUserByUserId(int userId) throws UserNotFoundException {
 		// TODO Auto-generated method stub
 		UserProfile userProfile = userRepo.findByUserId(userId);
 		System.out.println(userProfile);
 		if( userProfile == null ) {
-			throw new Exception("User doesnt exist");
+			throw new UserNotFoundException("User doesnt exist");
 		}
 		userRepo.delete(userProfile);
 		
@@ -77,20 +78,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String updateUser(int userId, UserProfileDTO userDto) throws Exception {
+	public String updateUser(int userId, UserProfileDTO userDto) throws UserNotFoundException {
 		// TODO Auto-generated method stub
 		
 		UserProfile updateUserProfile = userRepo.findByUserId(userId);
 		
 		if(updateUserProfile == null) {
-			throw new Exception("User Doesnt Exist");
+			throw new UserNotFoundException("User Doesnt Exist");
 		}
 		updateUserProfile.setMobileNumber(userDto.getMobileNumber());
 		updateUserProfile.setPermanentAddress(userDto.getPermanentAddress());
 		updateUserProfile.setOfficeAddress(userDto.getOfficeAddress());
 		
 		userRepo.save(updateUserProfile);
-		//String msg = "Mobilenumber, permanentAddress and OfficeAddress details are updated successfully for UserId: "+ userId;
+		
 		return "Mobilenumber, permanentAddress and OfficeAddress details are updated successfully for UserId "+userId;
 	}
 

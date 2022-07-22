@@ -13,38 +13,76 @@ import com.user.demo.entity.UserProfile;
 
 public class UserProfileDTO {
 	
-	@NotNull
+	
 	private int userId;
 	@Length(max=20)
-	@NotNull
+	
 	private String firstName;
 	@Length(max=20)
-	@NotNull
+	
 	private String lastName;
+	
 	@Email(message="Email Address format not specified")
-	@NotNull
 	private String emailId;
+	
 	@Min(1000000000L)
 	@Max(9999999999L)
 //	@Pattern(regexp="(^$|[0-9]{10})")
 	private Long mobileNumber;
+	
 	@Size(min = 7, max = 15, message = "Password should have at least 7 or less than 15 characters and minimun one special character")
-	//@Pattern(regexp="?=.*?[#?!@$%^&*-]", message="Password should have at least 7 or less than 15 characters and minimun one special character")
+	//@Pattern(regexp="“^ (?=.* [0-9]) (?=.* [a-z]) (?=.* [A-Z]) (?=.* #$%^&-+= ()]) (?=\\S+$). {8, 20}$”&]", message="Password should have minimun one special character")
 	private String password;
+	
 	@Length(max=20)
-	@NotNull
 	private String nationality;
+	
 	@Size(min = 7, max = 12, message = "Passport Number should have at least 7 or less than 13 characters")
 	private String passportNumber;
+	
 	@Length(max=200)
-	@NotNull
 	private String permanentAddress;
+	
 	@Length(max=200)
-	@NotNull
 	private String officeAddress;
+	
 	@Min(100000000000L)
 	@Max(999999999999L)
 	private Long personalIdentificationNumber;
+	
+	
+	public UserProfileDTO(int userId, @Length(max = 20) String firstName, @Length(max = 20) String lastName,
+			@Email(message = "Email Address format not specified") String emailId,
+			@Min(1000000000L) @Max(9999999999L) Long mobileNumber,
+			@Size(min = 7, max = 15, message = "Password should have at least 7 or less than 15 characters and minimun one special character") String password,
+			@Length(max = 20) String nationality,
+			@Size(min = 7, max = 12, message = "Passport Number should have at least 7 or less than 13 characters") String passportNumber,
+			@Length(max = 200) String permanentAddress, @Length(max = 200) String officeAddress,
+			@Min(100000000000L) @Max(999999999999L) Long personalIdentificationNumber) {
+		super();
+		this.userId = userId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.mobileNumber = mobileNumber;
+		this.password = password;
+		this.nationality = nationality;
+		this.passportNumber = passportNumber;
+		this.permanentAddress = permanentAddress;
+		this.officeAddress = officeAddress;
+		this.personalIdentificationNumber = personalIdentificationNumber;
+	}
+	
+	
+	public UserProfileDTO(@Min(1000000000L) @Max(9999999999L) Long mobileNumber,
+			@Length(max = 200) String permanentAddress, @Length(max = 200) String officeAddress) {
+		super();
+		this.mobileNumber = mobileNumber;
+		this.permanentAddress = permanentAddress;
+		this.officeAddress = officeAddress;
+	}
+
+
 	public int getUserId() {
 		return userId;
 	}
@@ -115,39 +153,10 @@ public class UserProfileDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserProfileDTO(@NotNull int userId, @Length(max = 20) @NotNull String firstName,
-			@Length(max = 20) @NotNull String lastName,
-			@Email(message = "Email Address format not specified") @NotNull String emailId,
-			@Min(1000000000L) @Max(9999999999L) Long mobileNumber,
-			@Size(min = 7, max = 15, message = "Password should have at least 7 or less than 15 characters and minimun one special character") @Pattern(regexp = "?=.*?[#?!@$%^&*-]", message = "Password should have at least 7 or less than 15 characters and minimun one special character") String password,
-			@Length(max = 20) @NotNull String nationality,
-			@Size(min = 7, max = 12, message = "Passport Number should have at least 7 or less than 13 characters") String passportNumber,
-			@Length(max = 200) @NotNull String permanentAddress, @Length(max = 200) @NotNull String officeAddress,
-			@Min(100000000000L) @Max(999999999999L) Long personalIdentificationNumber) {
-		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.mobileNumber = mobileNumber;
-		this.password = password;
-		this.nationality = nationality;
-		this.passportNumber = passportNumber;
-		this.permanentAddress = permanentAddress;
-		this.officeAddress = officeAddress;
-		this.personalIdentificationNumber = personalIdentificationNumber;
-	}
+
 	
 	
-	
-	
-	public UserProfileDTO(@Min(1000000000L) @Max(9999999999L) Long mobileNumber,
-			@Length(max = 200) @NotNull String permanentAddress, @Length(max = 200) @NotNull String officeAddress) {
-		super();
-		this.mobileNumber = mobileNumber;
-		this.permanentAddress = permanentAddress;
-		this.officeAddress = officeAddress;
-	}
+
 	public static UserProfile convertDTOToEntity(UserProfileDTO dto) {
 		UserProfile userProfile = new UserProfile();
 		
