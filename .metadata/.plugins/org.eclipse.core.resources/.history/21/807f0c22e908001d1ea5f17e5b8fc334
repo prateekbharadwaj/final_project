@@ -1,0 +1,46 @@
+package com.user.demo.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.user.demo.dto.UserProfileDTO;
+import com.user.demo.entity.UserProfile;
+import com.user.demo.service.UserService;
+import com.user.demo.service.UserServiceImpl;
+
+@RestController
+public class UserProfileController {
+	@Autowired
+    private UserService userService;
+	
+    @GetMapping(path = "/{userId}")
+    public UserProfile getUser(@PathVariable("id") String userId) {
+    	UserProfile userProfile = new UserProfile();
+    	UserProfileDTO userDTO = userService.getUserByUserId(userId);
+    	BeanUtils.copyProperties(userProfile, userDTO);
+    	return userProfile;
+    }
+    
+    @PostMapping()
+	public ResponseEntity<Object> createUser(@RequestBody @Valid UserProfileDTO dto) throws Exception{
+		
+		
+    	userService.createUser(dto);
+		HashMap<String,Object> hm= new HashMap<>();
+		hm.put("success","true");
+		hm.put("data",null);
+		
+		return ResponseEntity.ok(hm);
+	
+		
+	}
+}

@@ -1,0 +1,16 @@
+package com.user.demo.entity;
+
+import javax.persistence.Entity;
+
+@Entity
+public class UserProfile {
+	
+	private int userId;
+	private String firstName;
+	private String lastName;
+	private 
+	
+	
+	
+
+}

@@ -1,0 +1,5 @@
+package com.user.demo.handler;
+
+public class GlobalExceptionHandler {
+
+}

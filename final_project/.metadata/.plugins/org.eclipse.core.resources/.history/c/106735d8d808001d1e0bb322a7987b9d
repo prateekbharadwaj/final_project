@@ -1,0 +1,21 @@
+package com.user.demo.service;
+
+import org.springframework.stereotype.Service;
+
+import com.user.demo.dto.UserProfileDTO;
+import com.user.demo.entity.UserProfile;
+
+@Service
+public class UserServiceImpl implements UserService {
+     
+	 @Autowired
+	 Public UserProfileRepository userRepo;
+	@Override
+	public UserProfileDTO getUserByUserId(String userId) {
+		UserProfileDTO returnUserDTO = new UserDTO();
+		UserProfile userProfileByUserId = userRepo.findByUserId(userId);
+		
+		return null;
+	}
+
+}

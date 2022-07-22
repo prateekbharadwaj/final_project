@@ -1,0 +1,14 @@
+package com.user.demo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.user.demo.entity.UserProfile;
+
+@Repository
+public interface UserProfileRepository extends JpaRepository<UserProfile, Long>{
+    UserProfile findByemailId(String emailId);
+	UserProfile findByUserId(String userId);
+	UserProfile findByPersonaldentificationNumber(Long personalIdentificationNumber);
+
+}

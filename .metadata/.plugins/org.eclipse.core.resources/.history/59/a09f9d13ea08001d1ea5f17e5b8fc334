@@ -1,0 +1,5 @@
+package com.user.demo.dto;
+
+public class LoginDTO {
+
+}

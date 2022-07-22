@@ -1,0 +1,12 @@
+package com.user.demo.repository;
+
+import org.springframework.stereotype.Repository;
+
+import com.user.demo.entity.UserProfile;
+
+@Repository
+public interface UserProfileRepository {
+
+	UserProfile findByUserId(String userId);
+
+}

@@ -1,0 +1,8 @@
+package com.user.demo.service;
+
+import com.user.demo.dto.UserProfileDTO;
+
+public interface UserService{
+
+	public UserProfileDTO getUserByUserId(String userId);
+}

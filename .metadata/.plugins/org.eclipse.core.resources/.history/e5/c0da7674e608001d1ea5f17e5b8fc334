@@ -1,0 +1,31 @@
+package com.user.demo.service;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.user.demo.dto.UserProfileDTO;
+import com.user.demo.entity.UserProfile;
+import com.user.demo.repository.UserProfileRepository;
+
+@Service
+public class UserServiceImpl implements UserService {
+     
+	 @Autowired
+	 private UserProfileRepository userRepo;
+	
+	 @Override
+	public UserProfileDTO getUserByUserId(String userId) {
+		UserProfileDTO returnUserDTO = new UserProfileDTO();
+		UserProfile userProfileByUserId = userRepo.findByUserId(userId);
+		 if (userProfileByUserId == null)
+		 { 
+			 throw new UsernameNotFoundException(userId);
+		 }
+		 BeanUtils.copyProperties(userProfileByUserId, returnUserDTO);
+		 
+		return returnUserDTO;
+	}
+
+}
